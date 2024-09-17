@@ -70,8 +70,56 @@ This script aggregates spend data across multiple platforms between a start and 
    {CLIENT_NAME}_spend_{start_date}_to_{end_date}.csv
    ```
 
+### 3. **daily_data_export.py**
+
+This script is designed to download aggregated data for a specific platforms for a single day. It maintains metadata about the last successful run, ensuring that each run fetches data for the next available day. This helps in automating the data fetching process and keeping the data up-to-date.
+
+**How to Use:**
+
+1. Update the following variables with your details:
+   ```python
+   DATA_CLIENT_ID = 'your-data-client-id'
+   API_KEY = 'your-unique-api-key'
+   CLIENT_NAME = "your_client_name"
+   META_DATA_FILE = 'meta_d.csv'
+   ```
+
+2. Ensure that the metadata CSV file (`meta_d.csv`) is present in your working directory. This file will be created if it does not already exist.
+
+3. Run the script:
+   ```bash
+   python daily_data_export.py
+   ```
+
+**Script Functionality:**
+
+- **Metadata Management:** Maintains a CSV file (`meta_d.csv`) to keep track of the last fetched date and the success status of the export.
+- **Determine Fetch Dates:** The next date for the last successful fetch date.
+- **API Interaction:** 
+  - Initiates a data export request to Northbeam’s API.
+  - Polls the export status until the data is available.
+  - Downloads the export file and saves it as a CSV.
+- **Error Handling:** Updates the metadata with success or failure status based on the export process.
+
+**Output:**
+
+- A CSV file named `{CLIENT_NAME}_spend_{date}.csv` will be created with data for the specified day.
+- The metadata CSV (`meta_d.csv`) will be updated with the date of the successful or failed fetch.
+
+**Notes:**
+- If the data directory is up to date, the script will notify you and exit without performing any new data fetch.
+
 ---
 
 ## Future Work
 
 As the repository grows, needed ways to handle the data from nb api will be included.
+
+## Contributing
+
+If you find any bugs or want to add new features, please create a pull request or raise an issue.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
