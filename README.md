@@ -44,6 +44,8 @@ This script helps you explore what fields, keys for the payload you might want t
 
 4. The result will be saved as a `.txt` file in a readable format based on the selection.
 
+---
+
 ### 2. **aggregate_spend.py**
 
 This script aggregates spend data across multiple platforms between a start and end date (defaulting to Jan 1, 2024, to today). It retrieves data such as spend amount, ROAS, AOV, and more, then outputs the results into a CSV file.
@@ -69,6 +71,7 @@ This script aggregates spend data across multiple platforms between a start and 
    ```
    {CLIENT_NAME}_spend_{start_date}_to_{end_date}.csv
    ```
+---
 
 ### 3. **daily_data_export.py**
 
@@ -108,6 +111,44 @@ This script is designed to download aggregated data for a specific platforms for
 
 **Notes:**
 - If the data directory is up to date, the script will notify you and exit without performing any new data fetch.
+
+---
+
+### 4. **understand_with_logs.py**
+
+This script is designed primarily for developers to understand the request and response interactions with the Northbeam API by utilizing extensive logging at each step. It ingests spend data from various platforms, but its primary function is to provide insights into how API calls work and their responses.
+
+**How to Use:**
+
+1. Update the following variables with your details:
+   ```python
+   access_token = "<your unique access token>"
+   DATA_CLIENT_ID = "<your data client id>"
+   start_date = "2024-08-21T00:00:00Z"  # Modify as needed
+   ```
+   - The `start_date` and `end_date` are customizable, and the API returns data with inclusive limits.
+
+2. The script logs important information at each step, including:
+   - API request initiation.
+   - Response status and headers.
+   - Polling the export status until completion. Logs the status at every poll.
+   - Successful or failed export data retrieval.
+
+3. Run the script:
+   ```bash
+   python understand_with_logs.py
+   ```
+
+**Logging and Debugging:**
+- The logs give insights into each step of the API interaction, making it easier to debug issues or understand the API's behavior.
+- Polling continues every 10 seconds until the data export is either successful or fails, which is logged in detail.
+
+**Output:**
+
+- Once the export is complete, the data will be downloaded and saved as a CSV file (`datasuch.csv`).
+  
+**Notes:**
+- This script is intended for development and testing purposes and can be safely ignored if not needed for debugging or understanding API interactions.
 
 ---
 
