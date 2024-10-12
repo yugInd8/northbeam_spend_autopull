@@ -113,7 +113,8 @@ This script is designed to download aggregated data for a specific platforms for
 
 ## Future Work
 
-As the repository grows, needed ways to handle the data from nb api will be included.
+To make things more modular, the next stage on this repo's work has been pushed into a completely different repository. You can go ahead and read more more at :
+https://github.com/yugInd8/aws_northbeam_pipeline
 
 ## Contributing
 
